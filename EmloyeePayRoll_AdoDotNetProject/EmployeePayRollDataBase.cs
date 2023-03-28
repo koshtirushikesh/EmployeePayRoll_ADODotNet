@@ -109,5 +109,29 @@ namespace EmloyeePayRoll_AdoDotNetProject
                 }
             }
         }
+
+        public void UpdateTheSpacificData(EmployeeModel employeeModel)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            using (sqlConnection)
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SpUpdateDataToDataBase", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@EmpName", employeeModel.EmpName);
+                sqlCommand.Parameters.AddWithValue("@Address", employeeModel.Address);
+
+                int result = sqlCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+
+                if (result >= 1)
+                    Console.WriteLine("Sucsesfully Updated data");
+                else
+                    Console.WriteLine("Data not found for Update");
+            }
+        }
     }
 }

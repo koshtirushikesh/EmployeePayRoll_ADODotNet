@@ -24,3 +24,12 @@ CREATE PROCEDURE SpGetAllData
 AS BEGIN
 SELECT * FROM EmpPayRoll_Table
 END
+
+CREATE PROCEDURE SpUpdateDataToDataBase
+(
+@Address VARCHAR(100),
+@EmpName VARCHAR(30)
+)
+AS BEGIN
+UPDATE EmpPayRoll_Table SET Address = @Address WHERE EmpName = @EmpName
+END
