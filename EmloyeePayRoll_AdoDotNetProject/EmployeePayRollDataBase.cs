@@ -41,5 +41,73 @@ namespace EmloyeePayRoll_AdoDotNetProject
                     Console.WriteLine("Error While Adding data");
             }
         }
+
+        public void GetAllDataFromDataBase()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            List<EmployeeModel> employeeModelList = new List<EmployeeModel>();
+
+            using (sqlConnection)
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("SpGetAllData", sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    if (sqlDataReader.HasRows)
+                    {
+                        while (sqlDataReader.Read())
+                        {
+                            EmployeeModel employeeModel = new EmployeeModel();
+
+                            employeeModel.EmpId = sqlDataReader.GetInt32(0);
+                            employeeModel.EmpName = sqlDataReader.GetString(1);
+                            employeeModel.PhoneNumber = sqlDataReader.GetInt64(2);
+                            employeeModel.Address = sqlDataReader.GetString(3);
+                            employeeModel.Department = sqlDataReader.GetString(4);
+                            employeeModel.Gender = sqlDataReader.GetString(5)[0];
+                            employeeModel.BasicPay = (float)sqlDataReader.GetDouble(6);
+                            employeeModel.Deduction = (float)sqlDataReader.GetDouble(7);
+                            employeeModel.TaxablePay = (float)sqlDataReader.GetDouble(8);
+                            employeeModel.TAX = (float)sqlDataReader.GetDouble(9);
+                            employeeModel.NetPay = (float)sqlDataReader.GetDouble(10);
+                            employeeModel.StartDate = sqlDataReader.GetDateTime(11);
+                            employeeModel.City = sqlDataReader.GetString(12);
+                            employeeModel.Country = sqlDataReader.GetString(13);
+
+                            employeeModelList.Add(employeeModel);
+                        }
+
+                        foreach (EmployeeModel employee in employeeModelList)
+                        {
+                            Console.WriteLine(employee.EmpId + " " +
+                                employee.EmpName + " " +
+                                employee.PhoneNumber + " " +
+                                employee.Address + " " +
+                                employee.PhoneNumber + " " +
+                                employee.Department + " " +
+                                employee.Gender + " " +
+                                employee.BasicPay + " " +
+                                employee.Deduction + " " +
+                                employee.TaxablePay + " " +
+                                employee.TAX + " " +
+                                employee.NetPay + " " +
+                                employee.StartDate + " " +
+                                employee.City + " " +
+                                employee.Country
+                                );
+                        }
+                    }
+                    else
+                        Console.WriteLine("Data not found");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
     }
 }

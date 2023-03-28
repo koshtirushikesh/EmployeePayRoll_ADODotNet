@@ -20,4 +20,7 @@ INSERT INTO EmpPayRoll_Table(EmpName,PhoneNumber,Address ,Department, Gender,Bas
 VALUES (@EmpName, @PhoneNumber, @Address , @Department  ,@Gender,@BasicPay ,@Deduction ,@TaxablePay ,@TAX ,@NetPay ,@StartDate ,@City ,@Country )
 END
 
-
+CREATE PROCEDURE SpGetAllData
+AS BEGIN
+SELECT * FROM EmpPayRoll_Table
+END

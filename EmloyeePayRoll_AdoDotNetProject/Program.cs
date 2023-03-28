@@ -46,7 +46,7 @@ namespace EmloyeePayRoll_AdoDotNetProject
                 switch (option)
                 {
                     case 1: empPayRollDataBase.AddNewInfoToDataBase(empModel); break;
-                    
+                    case 2: empPayRollDataBase.GetAllDataFromDataBase(); break;
                     case 3: flag = false; break;
                 }
                 Console.ReadLine();
