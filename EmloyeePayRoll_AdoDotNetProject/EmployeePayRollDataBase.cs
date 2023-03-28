@@ -133,5 +133,28 @@ namespace EmloyeePayRoll_AdoDotNetProject
                     Console.WriteLine("Data not found for Update");
             }
         }
+
+        public void DeleteTheSpacificData(string empName)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            using (sqlConnection)
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SpDeleteDataFromDataBase", sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@empName", empName);
+
+                int result = sqlCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+
+                if (result >= 1)
+                    Console.WriteLine("Sucsesfully deleted data");
+                else
+                    Console.WriteLine("Data not found for deleat");
+            }
+        }
     }
 }

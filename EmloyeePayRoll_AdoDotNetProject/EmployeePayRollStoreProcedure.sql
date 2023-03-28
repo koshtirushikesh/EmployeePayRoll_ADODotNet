@@ -33,3 +33,11 @@ CREATE PROCEDURE SpUpdateDataToDataBase
 AS BEGIN
 UPDATE EmpPayRoll_Table SET Address = @Address WHERE EmpName = @EmpName
 END
+
+CREATE PROCEDURE SpDeleteDataFromDataBase
+(
+@EmpName VARCHAR(30)
+)
+AS BEGIN
+DELETE FROM EmpPayRoll_Table WHERE EmpName = @EmpName
+END

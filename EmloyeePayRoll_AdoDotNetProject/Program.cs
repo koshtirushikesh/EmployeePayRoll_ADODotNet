@@ -36,8 +36,9 @@ namespace EmloyeePayRoll_AdoDotNetProject
             {
                 Console.WriteLine("\n1. Add Employee" +
                     "\n2. Get All Data From Data Base" +
-                    "\n3. Update Data From Data Base");
-                Console.WriteLine("4. Exit the program");
+                    "\n3. Update Data From Data Base" +
+                    "\n4. Delete Data From Data Base");
+                Console.WriteLine("5. Exit the program");
 
                 Console.Write("\nEnter option: ");
                 int option = Convert.ToInt32(Console.ReadLine());
@@ -48,9 +49,9 @@ namespace EmloyeePayRoll_AdoDotNetProject
                     case 1: empPayRollDataBase.AddNewInfoToDataBase(empModel); break;
                     case 2: empPayRollDataBase.GetAllDataFromDataBase(); break;
                     case 3: empPayRollDataBase.UpdateTheSpacificData(empUpdateModel); break;
-                    case 4: flag = false; break;
+                    case 4: empPayRollDataBase.DeleteTheSpacificData(empUpdateModel.EmpName); break;
+                    case 5: flag = false; break;
                 }
-                Console.ReadLine();
             }
 
         }
